@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>Yashraj R. Sontakke</title>
+    <title>Linked List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -29,29 +29,84 @@
   </head>
   <body>
     <section class="page-header">
-      <img src="images/yashraj.png" alt="Yashraj Pic" draggable="false" height="200" width="200" align="left">
-      <h1 class="project-name">Yashraj R. Sontakke</h1>
-      <h2 class="project-tagline"></h2>
-      <a href="about.html" class="btn">About me</a>
-      <a href="dataStructures.html" class="btn">DataStructures</a>
-      <a href="algorithms.html" class="btn">Algorithms</a>
-      <a href="designPatterns.html" class="btn">Design Patterns</a>
-      <a href="https://raw.githubusercontent.com/yashrajrs/yashrajrs.github.io/master/Resume_Yashraj_R_Sontakke.pdf" class="btn">Download Resume</a>
-      
+      <h1 class="project-name">LinkedList implementation</h1>
+      <a href="index.html" class="btn">Home</a>
+      <a href="https://github.com/yashrajrs/AlgosAndDSInJava/blob/master/src/main/java/practice/dataStructures/linkedList/LinkedList.java" class="btn">View on GitHub</a>
     </section>
-    </section>
+
+<section class="page-header1">
+
+      <h2>
+      <a href="dataStructures.html" class="btn1">Data Structures</a>
+      <a href="stack.html" class="btn1">Stack</a>
+      <a href="queue.html" class="btn1">Queue</a>
+      <a href="binarySearchTree.html" class="btn1">Binary Search Tree</a>
+      </h2>
+</section>
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-the-website-of-yashraj-r-sontakke" class="anchor" href="#welcome-to-the-website-of-yashraj-r-sontakke" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to the website of Yashraj R. Sontakke.</h3>
 
-<p>The website contains examples for datastructures, algorithms, design patterns.</p>
+<h2>
+<a id="stack" class="anchor" href="#queue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Linked List</h2>
+
+<ul>
+<li>Linked list creates list of elements using next pointers.</li>
+<li>It usually provides three methods getFirst, appendToTail and delete.</li>
+<li>GetFirst returns the first element from the list, if there exists one.</li>
+<li>AppendToTail appends an element to the tail of the list.</li>
+<li>Delete deletes the element from the list, if it exits.</li>
+<li>Some more variations of linked list are <a href="https://github.com/yashrajrs/AlgosAndDSInJava/blob/master/src/main/java/practice/dataStructures/linkedList/DoublyLinkedList.java">DoublyLinkedList</a> and <a href="https://github.com/yashrajrs/AlgosAndDSInJava/blob/master/src/main/java/practice/dataStructures/linkedList/CircularLinkedList.java">CircularLinkedList</a>
+</li>
+</ul>
 
 <hr>
 
-<p> Will be adding practice problems soon.</p>
+<pre><code>
+public class LinkedList {
+    /** public class Node{
+     * Node next;
+     * Object data;	
+     */
+    private Node first;
 
-<hr>
+    public LinkedList(Long data) {
+        first = new Node(data);
+    }
+
+    public Node getFirst() {
+        return first;
+    }
+
+    public void appendToTail(final Long data) {
+        Node newNode = new Node(data);
+        Node n = first;
+        while (n.next != null) {
+            n = n.next;
+        }
+        n.next = newNode;
+
+    }
+
+    public Long deleteNode(Long data) {
+        Node n = first;
+        if (n.data == data) {
+            first = first.next;
+            return data;
+        }
+        while (n.next != null) {
+            if (n.next.data == data) {
+                n.next = n.next.next;
+                return data;
+            }
+            n = n.getNext();
+        }
+        return null;
+
+    }
+}    
+
+</code></pre>
 
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- LeaderBoard -->
@@ -63,14 +118,13 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with website, you can contact me at <a href="mailto:sontakkeyashraj@gmail.com">sontakkeyashraj@gmail.com</a>.</p>
-
+      <footer class="site-footer">
+        <span class="site-footer-owner">This is maintained by Yashraj R. Sontakke.</span>
+        </footer>
 
     </section>
-<script type="text/javascript">
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -80,7 +134,6 @@
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-  
+
   </body>
 </html>
-

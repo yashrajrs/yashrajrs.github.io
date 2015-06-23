@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Binary Search Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    
+    <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="images/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="images/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="images/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="images/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="images/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="images/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="images/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="images/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Binary Search Tree implementation</h1>
+      <a href="index.html" class="btn">Home</a>
+      <a href="https://github.com/yashrajrs/AlgosAndDSInJava/blob/master/src/main/java/practice/dataStructures/trees/BinarySearchTree.java" class="btn">View on GitHub</a>
+    </section>
+
+<section class="page-header1">
+
+      <h2>
+      <a href="dataStructures.html" class="btn1">Data Structures</a>
+      <a href="stack.html" class="btn1">Stack</a>
+      <a href="queue.html" class="btn1">Queue</a>
+      <a href="linkedlist.html" class="btn1">Linked List</a>
+      </h2>
+</section>
+
+    <section class="main-content">
+      <h3>
+
+<h2>
+<a id="stack" class="anchor" href="#queue" aria-hidden="true"><span class="octicon octicon-link"></span></a>Binary Search Tree</h2>
+
+<ul>
+<li>Binary Search Tree creates a binary tree such that an element has two children, left and right.</li>
+<li>The parent's value is greater than left child and parent's value is less than right child.</li>
+<li>It usually provides with addData, delete, printInOrder, printPreOrder and printPostOrder methods.</li>
+</ul>
+
+<hr>
+
+<pre><code>
+public class BinarySearchTree {
+   /**
+    * public class TreeNode {
+    * Integer data;
+    * TreeNode leftChild;
+    * TreeNode rightChild;
+    * TreeNode parent;
+    * }
+    public TreeNode parent;
+    
+    public TreeNode getParent() {
+        return parent;
+    }
+
+    /**
+     * Adds data to the binary tree.
+     *
+     * @param data the data to be added
+     */
+    public void addData(Integer data) {
+
+
+        TreeNode newNode = new TreeNode(data);
+
+        if (parent == null) {
+            parent = newNode;
+            return;
+        }
+        TreeNode currentNode = parent;
+        while (currentNode != null && ((currentNode.getData() > data && currentNode.getLeftChild() != null) ||
+                currentNode.getData() < data && currentNode.getRightChild() != null)) {
+            if (currentNode.getData() > data) {
+                currentNode = currentNode.getLeftChild();
+            } else {
+                currentNode = currentNode.getRightChild();
+            }
+        }
+
+        if (currentNode.getData() > data) {
+            currentNode.setLeftChild(newNode);
+            newNode.setParent(currentNode);
+        } else {
+            currentNode.setRightChild(newNode);
+            newNode.setParent(currentNode);
+        }
+    }
+
+    /**
+     * Prints in order tree for the node provided
+     */
+    public void printInOrder(final TreeNode node) {
+        if (node != null) {
+            printInOrder(node.getLeftChild());
+            System.out.println(node.getData());
+            printInOrder(node.getRightChild());
+        }
+    }
+
+    /**
+     * Prints pre order tree for the node provided
+     */
+    public void printPreOrder(final TreeNode node) {
+        if (node != null) {
+            System.out.println(node.getData());
+            printPreOrder(node.getLeftChild());
+            printPreOrder(node.getRightChild());
+        }
+    }
+
+    /**
+     * Prints post order tree for the node provided
+     */
+    public void printPostOrder(final TreeNode node) {
+        if (node != null) {
+            printPostOrder(node.leftChild);
+            printPostOrder(node.rightChild);
+            System.out.println(node.data);
+        }
+    }
+
+    /**
+     * Performs binary search for the data provided
+     */
+    public TreeNode binarySearch(final Integer data, final TreeNode parent) {
+        if (parent == null || parent.getData() == data) {
+            return parent;
+        } else if (parent.getData() > data) {
+            return binarySearch(data, parent.getLeftChild());
+        } else {
+            return binarySearch(data, parent.getRightChild());
+        }
+    }
+
+    /**
+     * Finds the tree minimum for the node provided
+     */
+    public TreeNode treeMinimum(TreeNode node) {
+        while (node.getLeftChild() != null) {
+            node = node.getLeftChild();
+        }
+        return node;
+    }
+
+    /**
+     * Finds the tree maximum for the node provided
+     */
+    public TreeNode treeMaximum(TreeNode node) {
+        while (node.getRightChild() != null) {
+            node = node.getRightChild();
+        }
+        return node;
+    }
+
+    /**
+     * Finds the successor for the node provided
+     */
+    public TreeNode findSuccessor(TreeNode node) {
+        if (node.getRightChild() != null) {
+            return treeMinimum(node.getRightChild());
+        } else {
+            TreeNode node1 = node.getParent();
+            while (node1 != null && node == node1.getRightChild()) {
+                node = node1;
+                node1 = node1.getParent();
+            }
+            return node1;
+        }
+    }
+
+    /**
+     * Deletes a node from the tree
+     *
+     * @param data
+     */
+    public void deleteData(Integer data) {
+        TreeNode node = binarySearch(data, parent);
+        if (node == null) {
+            return;
+        }
+
+        TreeNode rightChild = node.getRightChild();
+        TreeNode leftChild = node.getLeftChild();
+        if (leftChild == null && rightChild != null) {
+            TreeNode node1 = node.getParent();
+            node1.setRightChild(rightChild);
+            rightChild.setParent(node1);
+        } else if (leftChild != null && rightChild == null) {
+            TreeNode node1 = node.getParent();
+            node1.setLeftChild(leftChild);
+            leftChild.setParent(node1);
+        } else if (leftChild == null && rightChild == null) {
+            TreeNode node1 = node.getParent();
+            if (node1.getLeftChild() == node) {
+                node1.setLeftChild(null);
+            } else {
+                node1.setRightChild(null);
+            }
+            node.setParent(null);
+        } else {
+            TreeNode successor = findSuccessor(node);
+            if (node.rightChild == successor) {
+                TreeNode node1 = node.getParent();
+                node1.setRightChild(successor);
+                successor.setParent(node1);
+            } else {
+                TreeNode y = successor.getParent();
+                y.setLeftChild(successor.getRightChild());
+                TreeNode n1 = node.getParent();
+                n1.setRightChild(successor);
+                successor.setLeftChild(node.getLeftChild());
+                successor.setRightChild(node.getRightChild());
+            }
+        }
+
+
+    }
+}    
+
+</code></pre>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- LeaderBoard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-9006361687954760"
+     data-ad-slot="6288368934"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner">This is maintained by Yashraj R. Sontakke.</span>
+        </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-63980511-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
